@@ -9,7 +9,9 @@
 \usepackage[hidelinks]{hyperref}%--para hipervínculos
 \usepackage{parskip}%--para evitar tabulación de inicio de párrafo
 \usepackage{booktabs}%--
-\usepackage{tabularx}
+\usepackage{multirow, array}
+\usepackage{ragged2e}
+\usepackage{float}
 
 %definiendo color
 \definecolor{rojoOscuro}{HTML}{A20303}
@@ -22,7 +24,7 @@
 %---Cambios
 \renewcommand{\headrulewidth}{3pt}%--grosor de la linea superior
 \renewcommand{\headrule}{\hbox to\headwidth{\color{rojoOscuro}\leaders\hrule height \headrulewidth\hfill}}%--definir la linea base superior
-\renewcommand{\arraystretch}{2.5}%--espaciado de las tablas
+\renewcommand{\arraystretch}{2}%--espaciado de las tablas
 %---Inicio de informe
 \begin{document}
     \include{caratula.tex}
@@ -44,6 +46,7 @@
     \end{center}
 \vspace{0.1cm}
 \begin{large}
+\justify{
 El presente informe contiene todas las acciones realizadas por miembros del grupo CibersecFIIS para realizar una evaluación de seguridad y pruebas de penetración a cuatro computadoras pertenecientes a la plataforma Hack The Box.
 \\
 El propósito de este informe es evaluar y mejorar los conocimientos en ciberseguridad del equipo auditor haciendo uso de la plataforma Hack The Box.
@@ -51,6 +54,7 @@ El propósito de este informe es evaluar y mejorar los conocimientos en ciberseg
 El actual informe detalla el alcance de las pruebas realizadas y los hallazgos importantes junto con las recomendaciones para mitigar vulnerabilidades. A continuación, se proporciona un resumen de los hallazgos clave descubiertos durante la evaluación.
 \\
 La cantidad de vulnerabilidades encontradas por máquina se resume en el siguiente gráfico.
+}
 \end{large}
 \begin{figure}[h]
     \centering
@@ -90,6 +94,7 @@ La cantidad de vulnerabilidades encontradas por máquina se resume en el siguien
 \clearpage
 \section{Objetivo}
 \large{El objetivo de la presente evaluación de penetración de seguridad es encontrar vulnerabilidades y hacer una evaluación de criticidad de estas con el fin de que el negocio no se vea afectado por algún ataque malicioso que pueda afectar la calidad de sus servicios y su imagen.}
+\par
 \section{Alcance}
 \large{El alcance de esta evaluación se limita a las pruebas en los computadores de la plataforma Hack The Box con las siguientes direcciones IP:}
 \par
@@ -104,7 +109,7 @@ La cantidad de vulnerabilidades encontradas por máquina se resume en el siguien
     \end{tabular}
     \caption{Datos sobre las máquinas}
 \end{table}
-
+\par
 \section{Detalle de Hallazgos}
 \large{Los hallazgos encontrados en la evaluación de penetración de seguridad fueron los siguientes:}
 \par
@@ -113,15 +118,65 @@ Se encontraron 5 vulnerabilidades, pertenecientes a 3 de 4 máquinas.
 \par
 \begin{table}[h]
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
-        \footnotesize{Identificador} & \footnotesize{CVE} & \footnotesize{Tipo de vulnerabilidad} & \footnotesize{CVSSv2} & \footnotesize{OpenAdmin} & \footnotesize{Magic} & \footnotesize{Remote} & \footnotesize{Fuse} \\ \hline
-        \footnotesize{VU01} & - & \footnotesize{Ejecución Remota de Código} & - & \Large{\begin{math}\bullet\end{math}} &  &  &  \\ \hline
-        \footnotesize{VU02} & - & \footnotesize{Inyección SQL} & - &  & \Large{\begin{math}\bullet\end{math}} &  &  \\ \hline
-        \footnotesize{VU03} & \footnotesize{CVE-2017-6516} & \footnotesize{Obtención de privilegios} & \footnotesize{7.2} &  & \Large{\begin{math}\bullet\end{math}} &  &  \\ \hline
-        \footnotesize{VU04} & - & \footnotesize{Ejecución Remota de Código} & - &  &  & \Large{\begin{math}\bullet\end{math}} &  \\ \hline
-        \footnotesize{VU05} & \footnotesize{CVE-2019-1322} & \footnotesize{Otros} & \footnotesize{4.6} &  &  & \Large{\begin{math}\bullet\end{math}} &  \\ \hline
+    \begin{tabular}{|c|c|m{2.9cm}|c|c|c|c|c|} \hline
+        Identificador & CVE & \centering{Tipo de vulnerabilidad} & CVSSv2 & OpenAdmin & Magic & Remote & Fuse \\ \hline
+        VU01 & - & \centering{Ejecución Remota de Código} & - & \Large{\begin{math}\bullet\end{math}} &  &  &  \\ \hline
+        VU02 & - & \centering{Inyección SQL} & - &  & \Large{\begin{math}\bullet\end{math}} &  &  \\ \hline
+        VU03 & CVE-2017-6516 & \centering{Obtención de privilegios} & 7.2 &  & \Large{\begin{math}\bullet\end{math}} &  &  \\ \hline
+        VU04 & - & \centering{Ejecución Remota de Código} & - &  &  & \Large{\begin{math}\bullet\end{math}} &  \\ \hline
+        VU05 & CVE-2019-1322 & \centering{Otros} & 4.6 &  &  & \Large{\begin{math}\bullet\end{math}} &  \\ \hline
     \end{tabular}
     \caption{Vulnerabilidades encontradas}
 \end{table}
+
+\clearpage
+Se encontraron 7 debilidades entre las 4 máquinas objetivo.
+\par
+\begin{table}[h]
+    \centering{
+    \begin{tabular}{|c|c|m{4.5cm}|c|c|c|c|} \hline
+        Identificador & CWE & \centering{Debilidad} &  OpenAdmin & Magic & Remote & Fuse \\ \hline
+        DE01 & CWE-260 & \centering{Contraseña en archivo de configuración} & \Large{\begin{math}\bullet\end{math}} & \Large{\begin{math}\bullet\end{math}} &  &  \\ \hline
+        DE02 & CWE-200 & \centering{Exposición de información confidencial a un actor no autorizado} & \Large{\begin{math}\bullet\end{math}} & & \Large{\begin{math}\bullet\end{math}} & \Large{\begin{math}\bullet\end{math}} \\ \hline
+        DE03 & CWE-89 & \centering{Neutralización incorrecta de elementos especiales utilizados en un comando SQL} &  & \Large{\begin{math}\bullet\end{math}} &  &  \\ \hline
+        DE04 & CWE-434 & \centering{Carga sin restricciones de archivos del tipo peligroso} & & \Large{\begin{math}\bullet\end{math}} & &  \\ \hline
+        DE05 & CWE-521 & \centering{Débiles requisitos de contraseña} & & & & \Large{\begin{math}\bullet\end{math}} \\ \hline
+        DE06 & CWE-284 & \centering{Control de acceso inadecuado} & & & & \Large{\begin{math}\bullet\end{math}} \\ \hline
+        DE07 & CWE-20 & \centering{Validación de entrada incorrecta} & & \Large{\begin{math}\bullet\end{math}} & & \\ \hline
+    \end{tabular}
+    \caption{Vulnerabilidades encontradas}}
+\end{table}
+\par
+Los tipos de vulnerabilidades reconocidas son extraídos de la página CVE Details \cite{cvedetails}. 
+
+\vspace{0.1cm}
+Los puntajes CVSS v2 fueron extraídos de la página Vulmon – Vulnerability Intelligence Search Engine \cite{vulmon}.
+
+\vspace{0.1cm}
+La información relacionada a los tipos de debilidades es extraída de la página Common Weakness Enumeration de MITRE \cite{cwe}.
+%-----------Empieza pruebas de penetración----------
+\clearpage
+    \include{openadmin.tex}
+    \include{magic.tex}
+    \include{remote.tex}
+    \include{fuse.tex}
+
+%--referencias
+\clearpage
+\begin{thebibliography}{0}
+    \bibitem{cvedetails} CVE security vulnerability database. Security vulnerabilities, exploits, references and more. CVE Details. \href{https://www.cvedetails.com}{https://www.cvedetails.com}
+    \bibitem{vulmon} Vulmon - Vulnerability Intelligence Search Engine. Vulmon. \href{https://vulmon.com}{https://vulmon.com}
+    \bibitem{cwe} MITRE. CWE - Common Weakness Enumeration. CWE. \href{https://cwe.mitre.org}{https://cwe.mitre.org}
+    \bibitem{ona} GitHub - amriunix/ona-rce: OpenNetAdmin 18.1.1 - Remote Code Execution. GitHub. \href{https://github.com/amriunix/ona-rce}{https://github.com/amriunix/ona-rce}
+    \bibitem{crack} CrackStation - Online Password Hash Cracking - MD5, SHA1, Linux, Rainbow Tables, etc. CrackStation. \href{https://crackstation.net/}{https://crackstation.net/}
+    \bibitem{umbraco} GitHub - noraj/Umbraco-RCE: Umbraco CMS 7.12.4 - (Authenticated) Remote Code Execution. GitHub. \href{https://github.com/noraj/Umbraco-RCE}{https://github.com/noraj/Umbraco-RCE}
+    \bibitem{invokepower} nishang/Invoke-PowerShellTcp.ps1 at master · samratashok/nishang. GitHub. \href{https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1}{https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1}
+    \bibitem{powerup} PowerSploit/PowerUp.ps1 at master · PowerShellMafia/PowerSploit. GitHub. \href{https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1}{https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1}
+    \bibitem{roguewin} GitHub - antonioCoco/RogueWinRM: Windows Local Privilege Escalation from Service Account to System. GitHub. \href{https://github.com/antonioCoco/RogueWinRM}{https://github.com/antonioCoco/RogueWinRM}
+    \bibitem{mimikatz} GitHub - ParrotSec/mimikatz. GitHub. \href{https://github.com/ParrotSec/mimikatz}{https://github.com/ParrotSec/mimikatz}
+    \bibitem{evilwinrm} GitHub - Hackplayers/evil-winrm: The ultimate WinRM shell for hacking/pentesting. GitHub. \href{https://github.com/Hackplayers/evil-winrm}{https://github.com/Hackplayers/evil-winrm}
+    \bibitem{exploitcapcom} GitHub - tandasat/ExploitCapcom: This is a standalone exploit for a vulnerable feature in Capcom.sys. GitHub. \href{https://github.com/tandasat/ExploitCapcom}{https://github.com/tandasat/ExploitCapcom}
+    \bibitem{loaddriver} GitHub - TarlogicSecurity/EoPLoadDriver: Proof of concept for abusing SeLoadDriverPrivilege (Privilege Escalation in Windows). GitHub. \href{https://github.com/TarlogicSecurity/EoPLoadDriver/}{https://github.com/TarlogicSecurity/EoPLoadDriver/}
+\end{thebibliography}
 
 \end{document}
