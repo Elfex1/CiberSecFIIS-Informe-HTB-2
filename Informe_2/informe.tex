@@ -160,9 +160,43 @@ La información relacionada a los tipos de debilidades es extraída de la págin
     \include{magic.tex}
     \include{remote.tex}
     \include{fuse.tex}
-
+\clearpage
+%---conclusiones----
+\addcontentsline{toc}{section}{Conclusiones}%--para añadir seccion a las conclusiones
+\begin{center}
+    \section*{Conclusiones}
+\end{center}
+El equipo auditor concluye de la presente evaluación de penetración de seguridad lo siguiente:
+\begin{itemize}
+    \item En los cuatro computadores se encontraron vulnerabilidades o debilidades graves que permitieron el acceso como superusuario o administrador.
+    \item Dentro de las vulnerabilidades encontradas el 40\% son del tipo Ejecución Remota de Código.
+    \item El porcentaje de máquinas que tienen como debilidad la exposición de información confidencial a un actor no autorizado es de 75\%.
+    \item Para los cuatro casos se registraron las vulnerabilidades halladas, métodos de explotación, evidencias de post-explotación y recomendaciones de mitigación.
+    \item Los riesgos que se pueden presentar para los casos mencionados son el robo de información sensible, alteración de servicios web y control de los sistemas.
+\end{itemize}
+\clearpage
+%---recomendaciones--
+\addcontentsline{toc}{section}{Recomendaciones}%--para añadir seccion a las conclusiones
+\begin{center}
+    \section*{Recomendaciones}
+\end{center}
+Las recomendaciones para resolver las vulnerabilidades halladas y evitar daños futuros son las siguientes:
+\begin{itemize}
+    \item Actualizar con frecuencia la versión de los diferentes programas y servicios usados por las computadoras.
+    \item Usar de preferencia software con soporte continuo para evitar ataques cuando se reportan vulnerabilidades.
+    \item Realizar controles sobre la información confidencial expuesta hacia actores no autorizados.
+    \item No guardar contraseñas en archivos de configuración de los servicios ofrecidos.
+    \item Neutralizar correctamente los elementos especiales en comandos SQL.
+    \item Realizar un control estricto sobre los requisitos de las contraseñas para evitar contraseñas débiles ante fuerza bruta.
+    \item Verificar los permisos habilitados sobre los usuarios que podrían permitir el escalamiento de privilegios no deseados.
+    \item Prevenir que los programas con altos privilegios realicen ejecución mediante rutas relativas y no rutas absolutas.
+    \item Realizar un control sobre los archivos permitidos a subir, para evitar archivos maliciosos.
+    \item No usar servicios sin autenticación para compartir información confidencial.
+\end{itemize}
 %--referencias
 \clearpage
+
+\addcontentsline{toc}{section}{Referencias}
 \begin{thebibliography}{0}
     \bibitem{cvedetails} CVE security vulnerability database. Security vulnerabilities, exploits, references and more. CVE Details. \href{https://www.cvedetails.com}{https://www.cvedetails.com}
     \bibitem{vulmon} Vulmon - Vulnerability Intelligence Search Engine. Vulmon. \href{https://vulmon.com}{https://vulmon.com}
