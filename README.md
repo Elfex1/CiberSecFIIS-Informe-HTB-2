@@ -1,2 +1,2 @@
 # CiberSecFIIS-Informes-HTB
-Informes de Hack The Box elaborado por miembros de CiberSecFIIS
+Informe de Hack The Box elaborado por miembros de CiberSecFIIS
